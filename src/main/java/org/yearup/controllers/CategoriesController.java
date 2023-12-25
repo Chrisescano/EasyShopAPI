@@ -1,6 +1,7 @@
 package org.yearup.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.yearup.data.CategoryDao;
 import org.yearup.data.ProductDao;
@@ -37,8 +38,8 @@ public class CategoriesController
     }
 
     // add the appropriate annotation for a get action
-    @GetMapping("/{id}")
-    public Category getById(@PathVariable(name = "id") int id)
+    @GetMapping("/{categoryId}")
+    public Category getById(@PathVariable(name = "categoryId") int id)
     {
         // get the category by id
         return categoryDao.getById(id);
@@ -50,15 +51,17 @@ public class CategoriesController
     public List<Product> getProductsById(@PathVariable int categoryId)
     {
         // get a list of product by categoryId
-        return null;
+        return productDao.listByCategoryId(categoryId);
     }
 
     // add annotation to call this method for a POST action
     // add annotation to ensure that only an ADMIN can call this function
+    @PostMapping("")
+    //@PreAuthorize("hasRole('ROLE_ADMIN')") - ask paul how to see auth tokens
     public Category addCategory(@RequestBody Category category)
     {
         // insert the category
-        return null;
+        return categoryDao.create(category);
     }
 
     // add annotation to call this method for a PUT (update) action - the url path must include the categoryId
