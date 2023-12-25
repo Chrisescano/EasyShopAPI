@@ -1,5 +1,6 @@
 package org.yearup.data.mysql;
 
+import org.apache.ibatis.jdbc.SQL;
 import org.springframework.stereotype.Component;
 import org.yearup.data.CategoryDao;
 import org.yearup.models.Category;
@@ -95,6 +96,21 @@ public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao
     public void update(int categoryId, Category category)
     {
         // update category
+        String sql = """
+                UPDATE categories
+                SET name = ?, description = ?
+                where category_id = ?;
+                """;
+
+        try (Connection connection = getConnection()) {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, category.getName());
+            statement.setString(2, category.getDescription());
+            statement.setInt(3, categoryId);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw  new RuntimeException(e);
+        }
     }
 
     @Override
