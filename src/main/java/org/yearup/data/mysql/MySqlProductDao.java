@@ -67,9 +67,7 @@ public class MySqlProductDao extends MySqlDaoBase implements ProductDao
     public List<Product> listByCategoryId(int categoryId)
     {
         List<Product> products = new ArrayList<>();
-
-        String sql = "SELECT * FROM products " +
-                    " WHERE category_id = ? ";
+        String sql = "SELECT * FROM products WHERE category_id = ?;";
 
         try (Connection connection = getConnection())
         {
@@ -96,7 +94,8 @@ public class MySqlProductDao extends MySqlDaoBase implements ProductDao
     @Override
     public Product getById(int productId)
     {
-        String sql = "SELECT * FROM products WHERE product_id = ?";
+        String sql = "SELECT * FROM products WHERE product_id = ?;";
+
         try (Connection connection = getConnection())
         {
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -119,9 +118,10 @@ public class MySqlProductDao extends MySqlDaoBase implements ProductDao
     @Override
     public Product create(Product product)
     {
-
-        String sql = "INSERT INTO products(name, price, category_id, description, color, image_url, stock, featured) " +
-                " VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+        String sql = """
+                INSERT INTO products(name, price, category_id, description, color, image_url, stock, featured)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?);
+                """;
 
         try (Connection connection = getConnection())
         {
@@ -160,16 +160,11 @@ public class MySqlProductDao extends MySqlDaoBase implements ProductDao
     @Override
     public void update(int productId, Product product)
     {
-        String sql = "UPDATE products" +
-                " SET name = ? " +
-                "   , price = ? " +
-                "   , category_id = ? " +
-                "   , description = ? " +
-                "   , color = ? " +
-                "   , image_url = ? " +
-                "   , stock = ? " +
-                "   , featured = ? " +
-                " WHERE product_id = ?;";
+        String sql = """
+                UPDATE products
+                SET name = ?, price = ?, category_id = ?, description = ?, color = ?, image_url = ?, stock = ?, featured = ?
+                WHERE product_id = ?;
+                """;
 
         try (Connection connection = getConnection())
         {
