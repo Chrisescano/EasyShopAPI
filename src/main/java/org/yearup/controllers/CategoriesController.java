@@ -30,7 +30,7 @@ public class CategoriesController
     }
 
     // add the appropriate annotation for a get action
-    @GetMapping("")
+    @GetMapping()
     public List<Category> getAll()
     {
         // find and return all categories
@@ -38,7 +38,7 @@ public class CategoriesController
     }
 
     // add the appropriate annotation for a get action
-    @GetMapping("/{categoryId}")
+    @GetMapping("{categoryId}")
     public Category getById(@PathVariable(name = "categoryId") int id)
     {
         // get the category by id
@@ -56,7 +56,7 @@ public class CategoriesController
 
     // add annotation to call this method for a POST action
     // add annotation to ensure that only an ADMIN can call this function
-    @PostMapping("")
+    @PostMapping()
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     // TODO : ensure only ADMIN can call this function
     public Category addCategory(@RequestBody Category category)
@@ -67,7 +67,7 @@ public class CategoriesController
 
     // add annotation to call this method for a PUT (update) action - the url path must include the categoryId
     // add annotation to ensure that only an ADMIN can call this function
-    @PutMapping("/{id}")
+    @PutMapping("{id}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     // TODO : ensure only ADMIN can call this function
     public void updateCategory(@PathVariable int id, @RequestBody Category category)
@@ -79,7 +79,7 @@ public class CategoriesController
 
     // add annotation to call this method for a DELETE action - the url path must include the categoryId
     // add annotation to ensure that only an ADMIN can call this function
-    @DeleteMapping("/{id}")
+    @DeleteMapping("{id}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     // TODO : ensure only ADMIN can call this function
     public void deleteCategory(@PathVariable int id)
