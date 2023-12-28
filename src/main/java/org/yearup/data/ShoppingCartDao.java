@@ -8,5 +8,5 @@ public interface ShoppingCartDao
     // add additional method signatures here
     ShoppingCart add(int userId, int productId);
     void update();
-    void delete();
+    ShoppingCart delete(int userId);
 }
