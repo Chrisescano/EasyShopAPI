@@ -57,7 +57,11 @@ public class ShoppingCartController
     // https://localhost:8080/cart/products/15 (15 is the productId to be added
     @PostMapping("products/{id}")
     public ShoppingCart addProduct(@PathVariable int id, Principal principal) {
-        return null;
+        String userName = principal.getName();
+        User user = userDao.getByUserName(userName);
+        int userId = user.getId();
+
+        return shoppingCartDao.add(userId, id);
     }
 
 

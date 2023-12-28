@@ -6,7 +6,7 @@ public interface ShoppingCartDao
 {
     ShoppingCart getByUserId(int userId);
     // add additional method signatures here
-    ShoppingCart add();
+    ShoppingCart add(int userId, int productId);
     void update();
     void delete();
 }
