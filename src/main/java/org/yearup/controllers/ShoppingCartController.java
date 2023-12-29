@@ -87,12 +87,10 @@ public class ShoppingCartController
     // https://localhost:8080/cart
     @DeleteMapping()
     public ShoppingCart delete(Principal principal) {
-//        String userName = principal.getName();
-//        User user = userDao.getByUserName(userName);
-//        int userId = user.getId();
-        System.out.println("Hello World");
+        String userName = principal.getName();
+        User user = userDao.getByUserName(userName);
+        int userId = user.getId();
 
-        //return shoppingCartDao.delete(userId);
-        return null;
+        return shoppingCartDao.delete(userId);
     }
 }
