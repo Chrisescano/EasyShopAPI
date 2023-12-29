@@ -69,8 +69,17 @@ public class ShoppingCartController
     // https://localhost:8080/cart/products/15 (15 is the productId to be updated)
     // the BODY should be a ShoppingCartItem - quantity is the only value that will be updated
     @PutMapping("products/{id}")
-    public void update(@PathVariable int id, @RequestBody ShoppingCartItem item, Principal principal) {
+    public ShoppingCartItem update(@PathVariable int id, @RequestBody ShoppingCartItem item, Principal principal) {
+//        String userName = principal.getName();
+//        User user = userDao.getByUserName(userName);
+//        int userId = user.getId();
 
+        //simply putting { "quantity": 3 }
+        //TODO: is not good for json would need to make an object to hold this -
+        // - waiting for pauls response will just receive a shopping cart item at this time
+
+        //return shoppingCartDao.update(userId, quantity, id);
+        return item;
     }
 
 
@@ -78,10 +87,12 @@ public class ShoppingCartController
     // https://localhost:8080/cart
     @DeleteMapping()
     public ShoppingCart delete(Principal principal) {
-        String userName = principal.getName();
-        User user = userDao.getByUserName(userName);
-        int userId = user.getId();
+//        String userName = principal.getName();
+//        User user = userDao.getByUserName(userName);
+//        int userId = user.getId();
+        System.out.println("Hello World");
 
-        return shoppingCartDao.delete(userId);
+        //return shoppingCartDao.delete(userId);
+        return null;
     }
 }
