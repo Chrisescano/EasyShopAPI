@@ -10,6 +10,7 @@ import org.yearup.data.UserDao;
 import org.yearup.models.ShoppingCart;
 import org.yearup.models.ShoppingCartItem;
 import org.yearup.models.User;
+import org.yearup.data.util.Quantity;
 
 import java.security.Principal;
 
@@ -25,11 +26,13 @@ public class ShoppingCartController
     private ShoppingCartDao shoppingCartDao;
     private UserDao userDao;
     private ProductDao productDao;
+    private Quantity quantity;
 
-    public ShoppingCartController(ShoppingCartDao shoppingCartDao, UserDao userDao, ProductDao productDao) {
+    public ShoppingCartController(ShoppingCartDao shoppingCartDao, UserDao userDao, ProductDao productDao, Quantity quantity) {
         this.shoppingCartDao = shoppingCartDao;
         this.userDao = userDao;
         this.productDao = productDao;
+        this.quantity = quantity;
     }
 
     // each method in this controller requires a Principal object as a parameter
@@ -69,17 +72,12 @@ public class ShoppingCartController
     // https://localhost:8080/cart/products/15 (15 is the productId to be updated)
     // the BODY should be a ShoppingCartItem - quantity is the only value that will be updated
     @PutMapping("products/{id}")
-    public ShoppingCartItem update(@PathVariable int id, @RequestBody ShoppingCartItem item, Principal principal) {
-//        String userName = principal.getName();
-//        User user = userDao.getByUserName(userName);
-//        int userId = user.getId();
+    public ShoppingCartItem update(@PathVariable int id, @RequestBody Quantity quantity, Principal principal) {
+        String userName = principal.getName();
+        User user = userDao.getByUserName(userName);
+        int userId = user.getId();
 
-        //simply putting { "quantity": 3 }
-        //TODO: is not good for json would need to make an object to hold this -
-        // - waiting for pauls response will just receive a shopping cart item at this time
-
-        //return shoppingCartDao.update(userId, quantity, id);
-        return item;
+        return shoppingCartDao.update(userId, quantity.getQuantity(), id);
     }
 
 
