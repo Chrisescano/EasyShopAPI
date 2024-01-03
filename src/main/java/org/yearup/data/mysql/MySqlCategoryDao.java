@@ -26,7 +26,7 @@ public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao
     {
         // get all categories
         List<Category> categories = new ArrayList<>();
-        String sql = "SELECT * FROM categories";
+        String sql = "SELECT * FROM categories;";
 
         try (Connection connection = getConnection()) {
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -48,7 +48,7 @@ public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao
     public Category getById(int categoryId)
     {
         // get category by id
-        String sql = "SELECT * FROM categories WHERE category_id = ?";
+        String sql = "SELECT * FROM categories WHERE category_id = ?;";
 
         try (Connection connection = getConnection()) {
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -117,7 +117,7 @@ public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao
     public void delete(int categoryId)
     {
         // delete category
-        String sql = "DELETE FROM categories WHERE category_id = ?";
+        String sql = "DELETE FROM categories WHERE category_id = ?;";
 
         try (Connection connection = getConnection()) {
             PreparedStatement statement = connection.prepareStatement(sql);

@@ -10,6 +10,18 @@ public class OrderLineItem {
     private int quantity;
     private BigDecimal discount = BigDecimal.ZERO;
 
+    public OrderLineItem() {
+    }
+
+    public OrderLineItem(int orderLineItemId, int orderId, int productId, BigDecimal salesPrice, int quantity, BigDecimal discount) {
+        this.orderLineItemId = orderLineItemId;
+        this.orderId = orderId;
+        this.productId = productId;
+        this.salesPrice = salesPrice;
+        this.quantity = quantity;
+        this.discount = discount;
+    }
+
     /*-----Getter/Setter-----*/
     public int getOrderLineItemId() {
         return orderLineItemId;

@@ -6,14 +6,12 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.yearup.data.OrderDao;
-import org.yearup.data.ProfileDao;
-import org.yearup.data.ShoppingCartDao;
-import org.yearup.data.UserDao;
+import org.yearup.data.*;
 import org.yearup.models.*;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("orders")
@@ -24,6 +22,7 @@ public class OrdersController {
     private UserDao userDao;
     private ShoppingCartDao shoppingCartDao;
     private OrderDao orderDao;
+    private OrderLineItemDao orderLineItemDao;
 
 
     @Autowired
@@ -31,12 +30,14 @@ public class OrdersController {
             ProfileDao profileDao,
             UserDao userDao,
             ShoppingCartDao shoppingCartDao,
-            OrderDao orderDao
+            OrderDao orderDao,
+            OrderLineItemDao orderLineItemDao
     ) {
         this.profileDao = profileDao;
         this.userDao = userDao;
         this.shoppingCartDao = shoppingCartDao;
         this.orderDao = orderDao;
+        this.orderLineItemDao = orderLineItemDao;
     }
 
     @PostMapping()
@@ -53,14 +54,15 @@ public class OrdersController {
         Order order = orderDao.create(profile, shoppingCart);
 
         //create a orderlineitem for each shopping cart item
-            //create models, prolly in a list?
-
-        return null;
-
         //add each item to the database
-            //dao method to create orderlineitem for each S.C. item
+        for (ShoppingCartItem cartItem : shoppingCart.getItems().values()) {
+            orderLineItemDao.create(order, cartItem);
+        }
+        List<OrderLineItem> orderLineItems = orderLineItemDao.getByOrderId(order.getOrderId());
 
         //once created clear the shopping cart
-        //shoppingCartDao.delete(userId);
+        shoppingCartDao.delete(profile.getUserId());
+
+        return orderLineItems;
     }
 }
