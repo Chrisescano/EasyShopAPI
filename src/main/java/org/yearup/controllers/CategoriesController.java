@@ -1,6 +1,7 @@
 package org.yearup.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.yearup.data.CategoryDao;
@@ -8,6 +9,7 @@ import org.yearup.data.ProductDao;
 import org.yearup.models.Category;
 import org.yearup.models.Product;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 // add the annotations to make this a REST controller
@@ -39,10 +41,12 @@ public class CategoriesController
 
     // add the appropriate annotation for a get action
     @GetMapping("{categoryId}")
-    public Category getById(@PathVariable(name = "categoryId") int id)
+    public Category getById(@PathVariable(name = "categoryId") int id, HttpServletResponse response)
     {
         // get the category by id
-        return categoryDao.getById(id);
+        Category category = categoryDao.getById(id);
+        if (category == null) response.setStatus(HttpStatus.NOT_FOUND.value());
+        return category;
     }
 
     // the url to return all products in category 1 would look like this
@@ -58,10 +62,9 @@ public class CategoriesController
     // add annotation to ensure that only an ADMIN can call this function
     @PostMapping()
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    // TODO : ensure only ADMIN can call this function
+    @ResponseStatus(HttpStatus.CREATED)
     public Category addCategory(@RequestBody Category category)
     {
-        // insert the category
         return categoryDao.create(category);
     }
 
@@ -69,7 +72,6 @@ public class CategoriesController
     // add annotation to ensure that only an ADMIN can call this function
     @PutMapping("{id}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    // TODO : ensure only ADMIN can call this function
     public void updateCategory(@PathVariable int id, @RequestBody Category category)
     {
         // update the category by id
@@ -81,7 +83,7 @@ public class CategoriesController
     // add annotation to ensure that only an ADMIN can call this function
     @DeleteMapping("{id}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    // TODO : ensure only ADMIN can call this function
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteCategory(@PathVariable int id)
     {
         // delete the category by id
