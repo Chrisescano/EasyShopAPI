@@ -5,5 +5,6 @@ import org.yearup.models.Profile;
 import org.yearup.models.ShoppingCart;
 
 public interface OrderDao {
+    Order getByOrderId(int orderId);
     Order create(Profile profile, ShoppingCart shoppingCart);
 }

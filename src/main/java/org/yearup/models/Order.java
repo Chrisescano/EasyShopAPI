@@ -13,6 +13,20 @@ public class Order {
     private String zip;
     private BigDecimal shippingAmount = BigDecimal.ZERO;
 
+    public Order() {
+    }
+
+    public Order(int orderId, int userId, LocalDateTime date, String address, String city, String state, String zip, BigDecimal shippingAmount) {
+        this.orderId = orderId;
+        this.userId = userId;
+        this.date = date;
+        this.address = address;
+        this.city = city;
+        this.state = state;
+        this.zip = zip;
+        this.shippingAmount = shippingAmount;
+    }
+
     /*-----Getter/Setter-----*/
     public int getOrderId() {
         return orderId;

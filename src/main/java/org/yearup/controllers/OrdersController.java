@@ -6,14 +6,14 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.yearup.data.OrderDao;
 import org.yearup.data.ProfileDao;
 import org.yearup.data.ShoppingCartDao;
 import org.yearup.data.UserDao;
-import org.yearup.models.Profile;
-import org.yearup.models.ShoppingCart;
-import org.yearup.models.User;
+import org.yearup.models.*;
 
 import java.security.Principal;
+import java.util.List;
 
 @RestController
 @RequestMapping("orders")
@@ -23,21 +23,24 @@ public class OrdersController {
     private ProfileDao profileDao;
     private UserDao userDao;
     private ShoppingCartDao shoppingCartDao;
+    private OrderDao orderDao;
 
 
     @Autowired
     public OrdersController(
             ProfileDao profileDao,
             UserDao userDao,
-            ShoppingCartDao shoppingCartDao
+            ShoppingCartDao shoppingCartDao,
+            OrderDao orderDao
     ) {
         this.profileDao = profileDao;
         this.userDao = userDao;
         this.shoppingCartDao = shoppingCartDao;
+        this.orderDao = orderDao;
     }
 
     @PostMapping()
-    public void checkout(Principal principal) {
+    public List<OrderLineItem> checkout(Principal principal) {
         //user credentials
         String userName = principal.getName();
         User user = userDao.getByUserName(userName);
@@ -47,10 +50,12 @@ public class OrdersController {
         ShoppingCart shoppingCart = shoppingCartDao.getByUserId(profile.getUserId());
 
         //create and insert a new order into orders tables
-            //dao method to create new order
+        Order order = orderDao.create(profile, shoppingCart);
 
         //create a orderlineitem for each shopping cart item
             //create models, prolly in a list?
+
+        return null;
 
         //add each item to the database
             //dao method to create orderlineitem for each S.C. item
