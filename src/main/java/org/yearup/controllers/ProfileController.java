@@ -34,7 +34,11 @@ public class ProfileController {
     }
 
     @PutMapping()
-    public Profile editProfile(@RequestBody Profile profile) {
+    public Profile editProfile(@RequestBody Profile profile, Principal principal) {
+        String userName = principal.getName();
+        User user = userDao.getByUserName(userName);
+        int userId = user.getId();
+        profile.setUserId(userId);
         return profileDao.edit(profile);
     }
 }
