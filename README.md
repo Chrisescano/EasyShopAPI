@@ -1,6 +1,24 @@
 # EasyShop Application
 This is an API for the Easyshop store. You can visit the website and register an account, log in, change profile settings, add things to your cart, and delete the cart. Although the features are not many we hope that you can find your everyday products. Finding everyday products with Easy Shop!
 
+## Controllers
+### Categories Controller
+![Categories Controller](readmeImages/categoriescontroller.gif)
+### Products Controller
+![Product Controller](readmeImages/productscontroller.gif)
+### ShoppingCart Controller
+![ShoppingCart Controller](readmeImages/shoppingcartcontroller.gif)
+### Profile Controller
+![Profile Controller](readmeImages/profilecontroller.gif)
+### Orders Controller
+![Orders Controller](readmeImages/orderscontroller.gif)
+
+## Interesting Piece Of Code
+![Interesting Code](readmeImages/interestingcode.png)
+This create method is part of the MySqlOrderDao. It communicates with the database and creates
+an order entry in the order table of the database. I had to plan out the
+steps required to make this work and took full advantage of drawing diagrams.
+
 ## Tech Stack
 1. HTML, CSS (with BootStrap Library), and JavaScript
 2. Java with SpringBoot framework and Sprint Web API
