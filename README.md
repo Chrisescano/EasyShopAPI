@@ -3,21 +3,39 @@ This is an API for the Easyshop store. You can visit the website and register an
 
 ## Controllers
 ### Categories Controller
-![Categories Controller](readmeImages/categoriescontroller.gif)
+![Categories Controller](EasyShopAPI/readmeImages/categoriescontroller.gif)
 ### Products Controller
-![Product Controller](readmeImages/productscontroller.gif)
+![Product Controller](EasyShopAPI/readmeImages/productscontroller.gif)
 ### ShoppingCart Controller
-![ShoppingCart Controller](readmeImages/shoppingcartcontroller.gif)
+![ShoppingCart Controller](EasyShopAPI/readmeImages/shoppingcartcontroller.gif)
 ### Profile Controller
-![Profile Controller](readmeImages/profilecontroller.gif)
+![Profile Controller](EasyShopAPI/readmeImages/profilecontroller.gif)
 ### Orders Controller
-![Orders Controller](readmeImages/orderscontroller.gif)
+![Orders Controller](EasyShopAPI/readmeImages/orderscontroller.gif)
 
 ## Interesting Piece Of Code
-![Interesting Code](readmeImages/interestingcode.png)
+![Interesting Code](EasyShopAPI/readmeImages/interestingcode.png)
 This create method is part of the MySqlOrderDao. It communicates with the database and creates
 an order entry in the order table of the database. I had to plan out the
 steps required to make this work and took full advantage of drawing diagrams.
+
+## Requirements
+This project was made using Java JDK 17 on IntelliJ IDE
+
+## Usage
+Running everything is straightforward and can be done in an IDE:
+1. Run EasyShopWeb on a web browser
+2. Run EasyShopAPI
+3. Enjoy the site!
+
+Running Postman tests is straightforward as well:
+1. Download and install Postman from the web
+2. Make an account (you can link your Google account for ease of use)
+3. Import postman tests from PostmanCollections folder
+4. Run EasyShopAPI
+5. Run any postman test you wish or run the entire collection!
+   
+*Disclaimer: some tests require authentication where a user needs to log on*
 
 ## Tech Stack
 1. HTML, CSS (with BootStrap Library), and JavaScript
