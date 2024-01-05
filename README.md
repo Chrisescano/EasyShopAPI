@@ -19,6 +19,24 @@ This create method is part of the MySqlOrderDao. It communicates with the databa
 an order entry in the order table of the database. I had to plan out the
 steps required to make this work and took full advantage of drawing diagrams.
 
+## Requirements
+This project was made using Java JDK 17 on IntelliJ IDE
+
+## Usage
+Running everything is straightforward and can be done in an IDE:
+1. Run EasyShopWeb on a web browser
+2. Run EasyShopAPI
+3. Enjoy the site!
+
+Running Postman tests is straightforward as well:
+1. Download and install Postman from the web
+2. Make an account (you can link your Google account for ease of use)
+3. Import postman tests from PostmanCollections folder
+4. Run EasyShopAPI
+5. Run any postman test you wish or run the entire collection!
+   
+*Disclaimer: some tests require authentication where a user needs to log on*
+
 ## Tech Stack
 1. HTML, CSS (with BootStrap Library), and JavaScript
 2. Java with SpringBoot framework and Sprint Web API
