@@ -23,6 +23,9 @@ When the application is running it will start listening for HTTP request at the 
 - [Add Product To Shopping Cart](#add-product-to-shopping-cart)
 - [Update Product Quantity Of Shopping Cart](#update-product-quantity-of-shopping-cart)
 - [Clear Shopping Cart](#clear-shopping-cart)
+- [Get Profile Information](#get-profile-information)
+- [Update Profile Information](#update-profile-information)
+- [Check Out](#check-out)
 
 ---
 ### Getting All Categories
@@ -335,4 +338,85 @@ BODY :
     "items": {},
     "total": 0
 }
+```
+---
+### get-profile-information
+Request
+```
+URL  : http://localhost:8080/profile
+Type : GET
+BODY : null
+```
+Response
+```
+CODE : 200 OK
+BODY :
+{
+    "userId": [ID of user],
+    "firstName": "[first name of user]",
+    "lastName": "[last name of user]",
+    "phone": "[phone number of user]",
+    "email": "[email of user]",
+    "address": "[address of user]",
+    "city": "[city of user]",
+    "state": "[state of user]",
+    "zip": "[zip of user]"
+}
+```
+---
+### update-profile-information
+Request
+```
+URL  : http://localhost:8080/profile
+Type : PUT
+BODY : 
+{
+    "firstName": "[first name of user]",
+    "lastName": "[last name of user]",
+    "phone": "[phone number of user]",
+    "email": "[email of user]",
+    "address": "[address of user]",
+    "city": "[city of user]",
+    "state": "[state of user]",
+    "zip": "[zip of user]"
+}
+```
+Response
+```
+CODE : 200 OK
+BODY :
+{
+    "userId": [ID of user],
+    "firstName": "[first name of user]",
+    "lastName": "[last name of user]",
+    "phone": "[phone number of user]",
+    "email": "[email of user]",
+    "address": "[address of user]",
+    "city": "[city of user]",
+    "state": "[state of user]",
+    "zip": "[zip of user]"
+}
+```
+---
+### Check Out
+Request
+```
+URL  : http://localhost:8080/orders
+Type : POST
+BODY : NULL
+```
+Response
+```
+CODE : 200 OK
+BODY :
+[
+    {
+        "orderLineItemId": [ID of line item],
+        "orderId": [ID of order],
+        "productId": [ID of product],
+        "salesPrice": [price of line item],
+        "quantity": [quantity ordered],
+        "discount" [discount percentage]:
+    }
+]
 ```
